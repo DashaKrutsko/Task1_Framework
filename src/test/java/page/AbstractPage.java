@@ -11,14 +11,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractPage {
     private static final Duration WAIT_TIMEOUT_SECONDS = Duration.ofSeconds(10);
+    private static final String COMMON_OPTION_XPATH =  "//md-option[div[contains(text(),'%s')]]";
     protected final Logger logger = LogManager.getRootLogger();
     protected WebDriver driver;
 
     public void switchToTab(int tabIndex) {
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         try {
             driver.switchTo().window(tabs.get(tabIndex));
         } catch (IndexOutOfBoundsException e) {
@@ -44,7 +46,7 @@ public abstract class AbstractPage {
     }
 
     protected WebElement waitForElementToBeClickable(String option) {
-        By locator = By.xpath("//md-option[div[contains(text(),'" + option + "')]]");
+        By locator = By.xpath(String.format(COMMON_OPTION_XPATH, option));
         return waitForElementToBeClickable(locator);
     }
 

@@ -7,11 +7,16 @@ import org.openqa.selenium.support.FindBy;
 
 public class CalculatorPage extends AbstractPage {
 
+    private static final String NUMBER_GPU_XPATH = "//div[@id='select_container_509']//md-option[div[contains(text(),'%s')]]";
+    private static final String USAGE_XPATH = "//div[@id='select_container_139']//md-option[div[contains(text(),'%s')]]";
+    private static final String LOCATION_XPATH = "//div[@id='select_container_132']//md-option[div[contains(text(),'%s')]]";
+
     @FindBy(id = "myFrame")
     private WebElement searchFrameInner;
 
     @FindBy(xpath = "//button[@class = 'devsite-snackbar-action']")
     private WebElement searchButtonCookies;
+
     @FindBy(id = "input-0")
     private WebElement searchFieldComputeEngine;
 
@@ -117,10 +122,16 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
+//    public CalculatorPage selectNumberGPU(String option) {
+//        By optionLocator = By.xpath("//div[@id='select_container_509']//md-option[div[contains(text(),'"+option+"')]]");
+//        selectDropboxElement(searchFieldNumberGPU, optionLocator);
+//       return this;
+//    }
+
     public CalculatorPage selectNumberGPU(String option) {
-        By optionLocator = By.xpath("//div[@id='select_container_509']//md-option[div[contains(text(),'"+option+"')]]");
+        By optionLocator = By.xpath(String.format(NUMBER_GPU_XPATH, option));
         selectDropboxElement(searchFieldNumberGPU, optionLocator);
-       return this;
+        return this;
     }
 
     public CalculatorPage selectSSD(String option) {
@@ -129,13 +140,13 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public CalculatorPage selectLocation(String option) {
-        By optionLocator = By.xpath("//div[@id='select_container_132']//md-option[div[contains(text(),'"+option+"')]]");
+        By optionLocator = By.xpath(String.format(LOCATION_XPATH, option));
         selectDropboxElement(searchFieldLocation, optionLocator);
         return this;
     }
 
     public CalculatorPage selectUsage(String option) {
-        By optionLocator = By.xpath("//div[@id='select_container_139']//md-option[div[contains(text(),'"+option+"')]]");
+        By optionLocator = By.xpath(String.format(USAGE_XPATH, option));
         selectDropboxElement(searchFieldUsage, optionLocator);
         return this;
     }
@@ -145,7 +156,6 @@ public class CalculatorPage extends AbstractPage {
         logger.info("New estimate was added");
         return this;
     }
-
 
     public CalculatorPage clickButtonCookies() {
         waitForVisibilityOfElement(searchButtonCookies).click();
@@ -174,7 +184,6 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public void sendEmail() {
-
         waitForElementToBeClickable(searchButtonSendEmail).click();
     }
 
@@ -187,6 +196,5 @@ public class CalculatorPage extends AbstractPage {
         waitForElementToBeClickable(dropboxElement).click();
         waitForElementToBeClickable(optionLocator).click();
     }
-
 
 }

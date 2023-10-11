@@ -13,7 +13,6 @@ public class HomePage extends AbstractPage {
     private WebElement searchField;
 
     public HomePage(WebDriver driver) {
-
         super(driver);
     }
 
