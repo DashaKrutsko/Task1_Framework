@@ -122,12 +122,6 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-//    public CalculatorPage selectNumberGPU(String option) {
-//        By optionLocator = By.xpath("//div[@id='select_container_509']//md-option[div[contains(text(),'"+option+"')]]");
-//        selectDropboxElement(searchFieldNumberGPU, optionLocator);
-//       return this;
-//    }
-
     public CalculatorPage selectNumberGPU(String option) {
         By optionLocator = By.xpath(String.format(NUMBER_GPU_XPATH, option));
         selectDropboxElement(searchFieldNumberGPU, optionLocator);
